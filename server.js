@@ -46,3 +46,11 @@ process.on('unhandledRejection', err => {
         process.exit(1);
     });
 });
+
+// ** handle SIGTERM sent by HEROKU (dynos restart every 24 hours) **
+process.on('SIGTERM', () => {
+    console.log('✌️SIGTERM RECEIVED, gracefully shutting down the app...');
+    server.close(() => {
+        console.log('💥Process Terminated...');
+    });
+});

@@ -22,6 +22,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(compression());
 
+app.enable('trust proxy');  // FOR HEROKU
+
 const scriptSrcUrls = ['https://unpkg.com/', 'https://tile.openstreetmap.org', 'https://js.stripe.com/v3/'];
 const styleSrcUrls = [
   'https://unpkg.com/',

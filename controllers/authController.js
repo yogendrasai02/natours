@@ -19,7 +19,7 @@ const signToken = function (userId) {
 };
 
 // create token and send response
-const createAndSendToken = (user, statusCode, res) => {
+const createAndSendToken = (user, statusCode, req, res) => {
 
     const token = signToken(user._id);
 
@@ -27,7 +27,7 @@ const createAndSendToken = (user, statusCode, res) => {
 
     const cookieOptions = {
         expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-        secure: (process.env.NODE_ENV === 'production' ? true : false),
+        secure: (req.secure === true || req.headers['x-forwarded-proto'] === 'https'),  // FOR HEROKU
         httpOnly: true
     };
 
@@ -60,7 +60,7 @@ const signup = catchAsync(async (req, res, next) => {
     await new Email(newUser, url).sendWelcome();
 
     // create the JWT
-    createAndSendToken(newUser, 201, res);
+    createAndSendToken(newUser, 201, req, res);
 
 });
 
@@ -99,7 +99,7 @@ const login = catchAsync(async (req, res, next) => {
     }
 
     // create and send the token
-    createAndSendToken(user, 200, res);
+    createAndSendToken(user, 200, req, res);
 
 });
 
@@ -324,7 +324,7 @@ const resetPassword = catchAsync(async (req, res, next) => {
     // update passwordChangedAt property -> using a pre save hook mware in userModel
 
     // get the new token for login
-    createAndSendToken(user, 200, res);
+    createAndSendToken(user, 200, req, res);
 });
 
 // *** Update Password for a logged in user ***
@@ -347,7 +347,7 @@ const updatePassword = catchAsync(async (req, res, next) => {
     await user.save();
 
     // login the user and send the token
-    createAndSendToken(user, 200, res);
+    createAndSendToken(user, 200, req, res);
 
 });
 
