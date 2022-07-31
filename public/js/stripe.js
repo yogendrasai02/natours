@@ -10,7 +10,7 @@ export const bookTour = async (tourId) => {
             'Cross-Origin-Embedder-Policy': 'require-corp',
             'Cross-Origin-Opener-Policy': 'same-origin'
         };
-        const url = `http://localhost:3000/api/v1/bookings/checkout-session/${tourId}`;
+        const url = `/api/v1/bookings/checkout-session/${tourId}`;
         let res = await fetch(url, {
             headers: headers
         });
@@ -23,7 +23,7 @@ export const bookTour = async (tourId) => {
             displayAlert('Something went wrong', 'error');
         }
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         displayAlert(err, 'error');
     }
 };

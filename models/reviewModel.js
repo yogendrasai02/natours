@@ -53,7 +53,7 @@ reviewSchema.post('save', function() {
 
 // to calc avg rating while updating/deleting review
 reviewSchema.post(/^findOneAnd/, async function(doc) {
-    console.log(doc);
+    // console.log(doc);
     if(doc) {
         await doc.constructor.calcAvgRatings(doc.tour);
     }
@@ -76,7 +76,7 @@ reviewSchema.statics.calcAvgRatings = async function(tourId) {
             }
         }
     ]);
-    console.log(stats);
+    // console.log(stats);
     if(stats.length > 0) {
         const updatedTour = await Tour.findByIdAndUpdate(tourId, {
             ratingsQuantity: stats[0].noOfRatings,

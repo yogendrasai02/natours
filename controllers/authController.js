@@ -145,7 +145,7 @@ const protectRoute = catchAsync(async (req, res, next) => {
     // 2. check if token is valid
     // verify token -> we get decoded token (with payload)
     const decoded = await util.promisify(jwt.verify)(token, process.env.JWT_SECRET_KEY);
-    console.log(decoded);
+    // console.log(decoded);
     // handle errors with this verification: a) invalid token b) token expired
     // this error handling is done at the global error handling middleware
 

@@ -1,6 +1,6 @@
 import { displayAlert } from './alerts';
 export const updateData = (data, type) => {
-    let url = 'http://localhost:3000/api/v1/users';
+    let url = '/api/v1/users';
     if(type === 'data') url += '/updateMe';
     else    url += '/updateMyPassword';
     let headersObj = {};

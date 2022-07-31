@@ -64,7 +64,7 @@ if(userPasswordUpdateForm) {
 
 if(bookTourBtn) {
     bookTourBtn.addEventListener('click', e => {
-        console.log(e);
+        // console.log(e);
         const tourId = e.target.dataset.tourId;
         bookTour(tourId);
     });

@@ -3,7 +3,7 @@ export const login = (email, password) => {
     const payload = {
         email, password
     };
-    const url = 'http://localhost:3000/api/v1/users/login';
+    const url = '/api/v1/users/login';
     fetch(url, {
         method: 'POST',
         headers: {
@@ -26,7 +26,7 @@ export const login = (email, password) => {
 };
 
 export const logout = () => {
-    const url = 'http://localhost:3000/api/v1/users/logout';
+    const url = '/api/v1/users/logout';
     fetch(url)
         .then(res => res.json())
         .then(data => {

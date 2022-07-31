@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const csp = require('express-csp');
+const compression = require('compression');
 
 const app = express();
 app.set('view engine', 'pug');
@@ -18,6 +19,8 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(compression());
 
 const scriptSrcUrls = ['https://unpkg.com/', 'https://tile.openstreetmap.org', 'https://js.stripe.com/v3/'];
 const styleSrcUrls = [
@@ -134,12 +137,6 @@ const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
-
-app.use((req, res, next) => {
-  console.log("Hello");
-  console.log(req.url);
-  next();
-});
 
 // forward the request to APPROPRIATE ROUTE
 app.use('/api/v1/tours', tourRouter);

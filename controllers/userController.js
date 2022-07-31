@@ -70,8 +70,8 @@ const updateMe = catchAsync(async (req, res, next) => {
         return;
     }
 
-    console.log(req.body);
-    console.log(req.file);
+    // console.log(req.body);
+    // console.log(req.file);
 
     // 2. filter unwanted fields. for now, allow only name, email to be updated
     const filteredBody = filterObj(req.body, 'name', 'email');

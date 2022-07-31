@@ -142,7 +142,7 @@ tourSchema.virtual('reviews', {
 // ** DOCUMENT MIDDLEWARE **
 // pre save hook to add a slug to created document
 tourSchema.pre('save', function(next) {
-    console.log('🙌 Before saving');
+    // console.log('🙌 Before saving');
     this.slug = slugify(this.name, {
         lower:true
     });
@@ -159,14 +159,14 @@ tourSchema.pre('save', function(next) {
 
 // post save hook (dummy, does nothing)
 tourSchema.post('save', function(doc, next) {
-    console.log('Document saved 🙌');
+    // console.log('Document saved 🙌');
     next();
 });
 
 // ** QUERY MIDDLEWARE **
 // pre find hook to exclude the secret tours from query results
 tourSchema.pre(/^find/, function(next) {
-    console.log('🙌 Before querying');
+    // console.log('🙌 Before querying');
     this.find({ secretTour: { $ne: true } });
     this.populate({
         path: 'guides',
@@ -177,7 +177,7 @@ tourSchema.pre(/^find/, function(next) {
 
 // post find hook (just to display queries documents)
 tourSchema.post(/^find/, function(docs, next) {
-    console.log('After querying 🙌');
+    // console.log('After querying 🙌');
     // console.log(docs);
     next();
 });

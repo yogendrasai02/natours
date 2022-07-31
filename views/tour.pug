@@ -76,7 +76,6 @@ block content
                         - const ratingsArr = [1, 2, 3, 4, 5];
                         each r in ratingsArr
                             - let active = 'active';
-                            console.log(r, review.rating)
                             - if(r > review.rating) { active = 'inactive'; }
                             svg.reviews__star(class=`reviews__star--${active}`)
                                 use(xlink:href='/img/icons.svg#icon-star')

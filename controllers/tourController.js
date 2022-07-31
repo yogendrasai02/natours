@@ -198,7 +198,7 @@ const getToursWithin = catchAsync(async (req, res, next) => {
     const radius = (unit === 'mi') 
                     ? generalUtils.milesToRadians(distance) 
                     : generalUtils.kmToRadians(distance);
-    console.log(distance, lat, lng, unit);
+    // console.log(distance, lat, lng, unit);
     const tours = await Tour.find({
         startLocation: {
             $geoWithin: {
@@ -209,7 +209,7 @@ const getToursWithin = catchAsync(async (req, res, next) => {
             }
         }
     });
-    console.log(tours);
+    // console.log(tours);
     // send response
     res.status(200).json({
         status: 'success',
