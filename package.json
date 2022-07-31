@@ -7,7 +7,8 @@
     "main": false
   },
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
+    "start:dev": "set NODE_ENV=development&&nodemon server.js",
     "start:prod": "set NODE_ENV=production&&nodemon server.js",
     "debug": "ndb server.js",
     "watch:js": "parcel serve ./public/js/index.js --dist-dir ./public/js/bundled",
@@ -53,5 +54,8 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "url": "^0.11.0"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   }
 }
