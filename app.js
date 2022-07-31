@@ -24,6 +24,8 @@ app.use(compression());
 
 app.enable('trust proxy');  // FOR HEROKU
 
+app.use(cors());
+
 const scriptSrcUrls = ['https://unpkg.com/', 'https://tile.openstreetmap.org', 'https://js.stripe.com/v3/'];
 const styleSrcUrls = [
   'https://unpkg.com/',
@@ -132,6 +134,9 @@ app.use(hpp({
 //     console.log("Cookies: ", req.cookies);
 //     next();
 // });
+
+// to respond to OPTIONS pre-flight phase sent by browser
+app.options('*', cors());
 
 // import routers
 const tourRouter = require('./routes/tourRoutes');
