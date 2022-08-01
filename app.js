@@ -10,6 +10,8 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const compression = require('compression');
 
+const bookingController = require('./controllers/bookingController');
+
 const app = express();
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -112,6 +114,11 @@ app.use('/api', limiter);
 // to log the REQUEST INFO in the console
 const morgan = require('morgan');
 app.use(morgan('dev'));
+
+// *** SUPPORT for STRIPE WEBHOOKS, should parse raw body, hence before body parser ***
+app.post('/webhook-checkout', 
+  express.json({ type: 'application/json' }), 
+  bookingController.webhookCheckout);
 
 // to parse the BODY of request object
 app.use(express.json());

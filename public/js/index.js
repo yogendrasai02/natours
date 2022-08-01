@@ -2,6 +2,7 @@ import { login, logout } from './login';
 import { renderMap } from './map_leaflet';
 import { updateData } from './updateUserAccount';
 import { bookTour } from './stripe';
+import { displayAlert } from './alerts';
 
 import '@babel/polyfill';
 
@@ -11,7 +12,7 @@ const logoutBtn = document.querySelector('.nav__el--logout');
 const userAccountUpdateForm = document.querySelector('.form-user-data');
 const userPasswordUpdateForm = document.querySelector('.form-user-password');
 const bookTourBtn = document.getElementById('bookTourBtn');
-
+const alertMessage = document.querySelector('body').dataset.alert;
 
 if(mapDiv) {
     const locations = JSON.parse(mapDiv.dataset.locations);
@@ -68,4 +69,8 @@ if(bookTourBtn) {
         const tourId = e.target.dataset.tourId;
         bookTour(tourId);
     });
+}
+
+if(alertMessage) {
+    displayAlert(alertMessage, 'success', 15);
 }
